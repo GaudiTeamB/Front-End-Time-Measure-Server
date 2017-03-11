@@ -1,0 +1,36 @@
+{
+  "name": "gb-fron-end-time-measurement",
+  "version": "0.0.1",
+  "description": "This is the web front end done in React of the time response application",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaudiTeamB/gb-end-time-measurent.git"
+  },
+  "keywords": [
+    "front-end",
+    "node",
+    "react",
+    "js"
+  ],
+  "author": "Gaudi Team B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GaudiTeamB/gb-end-time-measurent/issues"
+  },
+  "homepage": "https://github.com/GaudiTeamB/gb-end-time-measurent#readme",
+  "dependencies": {
+    "express": "4.15.2",
+    "swagger": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.1.1",
+    "eslint": "3.17.1",
+    "eslint-plugin-react": "6.10.0",
+    "mocha": "*",
+    "chai": "*"
+  }
+  }

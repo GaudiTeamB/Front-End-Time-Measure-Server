@@ -1,7 +1,8 @@
 "use strict";
 
 const 
-    React = require("react");
+    React = require("react"),
+    BarcharResult = require("./barchart-result");
 
 module.exports =  React.createClass({
     getInitialState: function() {
@@ -36,6 +37,7 @@ module.exports =  React.createClass({
                        <input id="destinationHost" value={this.state.times} onChange={this.onTimesChange} />
                        <button type="button" onClick={this.checkTimes}>Check response time</button>
                    </form>
+                   <BarcharResult />
                 </div>;
     }
 });

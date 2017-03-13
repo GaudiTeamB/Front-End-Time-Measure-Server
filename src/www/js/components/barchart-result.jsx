@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
     render: function() {
   	    return	<div><h1>CHART</h1>
-  	    <BarChart width={600} height={300} data={this.state.data}
+  	    <BarChart width={600} height={300} data={this.props.data}
                           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                     <XAxis dataKey="name"/>
                     <YAxis/>

@@ -35,8 +35,7 @@ module.exports =  React.createClass({
 
     checkTimes: function(item) {
         console.log("Call service.");
-        let data = this.state.data;
-        var data = [
+        let data = [
                 {name: 'Page A', uv: 5000, pv: 9400, amt: 1200},
                 {name: 'Page B', uv: 6000, pv: 8398, amt: 2310},
                 {name: 'Page C', uv: 7000, pv: 7800, amt: 3490},

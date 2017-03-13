@@ -35,8 +35,7 @@ module.exports =  React.createClass({
 
     checkTimes: function(item) {
         console.log("Call service.");
-        let data = this.state.data;
-        var data = [
+        var mockData = [
                 {name: 'Page A', uv: 5000, pv: 9400, amt: 1200},
                 {name: 'Page B', uv: 6000, pv: 8398, amt: 2310},
                 {name: 'Page C', uv: 7000, pv: 7800, amt: 3490},
@@ -46,7 +45,7 @@ module.exports =  React.createClass({
                 {name: 'Page G', uv: 2490, pv: 3300, amt: 2200},
             ]; 
         this.setState({
-            data: data
+            data: mockData
         });
     },
 

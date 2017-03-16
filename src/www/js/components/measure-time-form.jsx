@@ -29,6 +29,13 @@ module.exports =  React.createClass({
         });
     },
 
+    onBarcharUpdate: function(data){
+        console.log(data);
+        this.setState({
+            data: data
+        })
+    },
+
     callWebService2: function(path){
          return new Promise(function (resolve, reject) {
 
@@ -37,15 +44,14 @@ module.exports =  React.createClass({
                 headers: {
                     Accept: 'application/json',
                 },  
-            },
-            ).then(response => {
+            }).then(response => {
                 if (response.ok) {
                     response.json().then(json => {
                         console.log(json);
                         resolve(json);
                     }).catch(error => reject(error));
                 }
-            });
+            }).catch(error => reject(error));
            
         });
     },
@@ -77,19 +83,12 @@ module.exports =  React.createClass({
     checkTimes: function() {
 
         var pathValue = '/?url=' + this.state.destinationHost + '&times='+ this.state.times;
-        var callback = this.updateState;
+        var barcharUpdate = this.onBarcharUpdate;
         this.retrieveJson(pathValue).then(function(jsonResponse){
-            callback(jsonResponse.data);
+            barcharUpdate(jsonResponse.data);
         }).catch(function(message) {
             alert("ERROR: " + message); 
         });
-    },
-
-    updateState: function(data){
-        console.log(data);
-        this.setState({
-            data: data
-        })
     },
 
     render: function() {

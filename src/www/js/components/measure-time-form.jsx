@@ -10,13 +10,9 @@ module.exports =  React.createClass({
             destinationHost: "",
             times: 1,
             data: [
-                {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-                {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-                {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-                {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-                {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-                {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-                {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
+                {endpoint: 'EMEA', average: 4000},
+                {endpoint: 'AMER', average: 3000},
+                {endpoint: 'ASIA', average: 2000},
             ],
         };
     },
@@ -33,20 +29,67 @@ module.exports =  React.createClass({
         });
     },
 
-    checkTimes: function(item) {
-        console.log("Call service.");
-        let data = [
-                {name: 'Page A', uv: 5000, pv: 9400, amt: 1200},
-                {name: 'Page B', uv: 6000, pv: 8398, amt: 2310},
-                {name: 'Page C', uv: 7000, pv: 7800, amt: 3490},
-                {name: 'Page D', uv: 8780, pv: 6908, amt: 4500},
-                {name: 'Page E', uv: 9890, pv: 5800, amt: 5681},
-                {name: 'Page F', uv: 1390, pv: 4800, amt: 6400},
-                {name: 'Page G', uv: 2490, pv: 3300, amt: 2200},
-            ]; 
+    callWebService2: function(path){
+         return new Promise(function (resolve, reject) {
+
+             fetch('http://localhost:8081/?url=www.google.es&times=2', {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                },  
+            },
+            ).then(response => {
+                if (response.ok) {
+                    response.json().then(json => {
+                        console.log(json);
+                        resolve(json);
+                    }).catch(error => reject(error));
+                }
+            });
+           
+        });
+    },
+
+    callWebService: function(path){
+        return new Promise(function (resolve, reject) {
+            debugger;
+            var jsonResult =  {data: [
+                            {endpoint: 'EMEA', average: 2500},
+                            {endpoint: 'AMER', average: 3600},
+                            {endpoint: 'ASIA', average: 5500},
+                        ]};
+
+            resolve(jsonResult);
+        });
+    },
+
+    retrieveJson: function(e) {
+        var service =this.callWebService2; 
+        return new Promise(function (resolve, reject) {
+            service(e).then(function(result) {
+                resolve(result);
+            }).catch(function(message) { 
+                reject( message);            
+            });
+        });
+    },
+
+    checkTimes: function() {
+
+        var pathValue = '/?url=' + this.state.destinationHost + '&times='+ this.state.times;
+        var callback = this.updateState;
+        this.retrieveJson(pathValue).then(function(jsonResponse){
+            callback(jsonResponse.data);
+        }).catch(function(message) {
+            alert("ERROR: " + message); 
+        });
+    },
+
+    updateState: function(data){
+        console.log(data);
         this.setState({
             data: data
-        });
+        })
     },
 
     render: function() {

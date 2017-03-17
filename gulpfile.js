@@ -6,45 +6,45 @@ const
 	babel = require("gulp-babel"),
 	sass = require("gulp-sass");
 
-gulp.task("sass", function() {
+gulp.task("sass", function () {
 	return gulp.src("src/www/css/site.scss")
 		.pipe(sass())
-		.on("error", function() {
+		.on("error", function () {
 			console.dir(arguments);
 		})
 		.pipe(gulp.dest("dist/www/css"));
 });
 
-gulp.task("babel", function() {
+gulp.task("babel", function () {
 
-	return gulp.src(["src/www/js/**/*.jsx","src/www/js/**/*.js"])
+	return gulp.src(["src/www/js/**/*.jsx", "src/www/js/**/*.js"])
 		.pipe(babel({
 			plugins: ["transform-react-jsx"],
 			presets: ["es2015", "react"]
 		}))
-		.on("error", function() {
+		.on("error", function () {
 			console.dir(arguments);
 		})
 		.pipe(gulp.dest("dist/www/js"));
 
 });
 
-gulp.task("webpack", ["babel"], function() {
+gulp.task("webpack", ["babel"], function () {
 
 	return gulp.src("./dist/www/js/site.js")
 		.pipe(webpack({
 			output: {
-        filename: "site-webpack.js"
-    	}
+				filename: "site-webpack.js"
+			}
 		}))
-		.on("error", function() {
+		.on("error", function () {
 			console.dir(arguments);
 		})
 		.pipe(gulp.dest("./dist/www/js"));
 
 });
 
-gulp.task("copy", function() {
+gulp.task("copy", function () {
 
 	gulp.src("node_modules/bootstrap/dist/css/**/*")
 		.pipe(gulp.dest("dist/www/css"));
@@ -52,21 +52,24 @@ gulp.task("copy", function() {
 	gulp.src("src/www/**/*.html")
 		.pipe(gulp.dest("dist/www"));
 
-	gulp.src(["src/**/*","!src/www/**/*"])
+	gulp.src(["src/**/*", "!src/www/**/*"])
 		.pipe(gulp.dest("dist"));
+
+	gulp.src(["src/www/images/*"])
+		.pipe(gulp.dest("dist/www/images"));
 
 });
 
-gulp.task("server", function() {
+gulp.task("server", function () {
 	require("./index.js");
 });
 
 gulp.task("default", ["sass", "webpack", "copy"], function () {
 
 	gulp.watch("src/www/css/site.scss", ["sass"]);
-	gulp.watch(["src/www/js/**/*.jsx","src/www/js/**/*.js"], ["webpack"]);
+	gulp.watch(["src/www/js/**/*.jsx", "src/www/js/**/*.js"], ["webpack"]);
 	gulp.watch(["node_modules/bootstrap/dist/css/**/*"], ["copy"]);
 	gulp.watch(["src/www/**/*.html"], ["copy"]);
-	gulp.watch(["src/**/*","!src/www/**/*"], ["copy"]);
+	gulp.watch(["src/**/*", "!src/www/**/*"], ["copy"]);
 
 });

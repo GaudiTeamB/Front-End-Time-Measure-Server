@@ -18,9 +18,8 @@ export default class MeasureTimeForm extends React.Component {
         var self = this;
         this.retrieveJson(pathValue).then(function (jsonResponse) {
             barcharUpdate(jsonResponse.data, self);
-            self.render();
-        }).catch(function (message) {
-            alert("ERROR: " + message);
+        }).catch(function (error) {
+            self.setState({ error: error.message });
         });
     }
 
@@ -40,13 +39,12 @@ export default class MeasureTimeForm extends React.Component {
         self.setState({
             data: data
         });
-        console.log(self.state);
     }
 
     callWebService2(path) {
         return new Promise(function (resolve, reject) {
 
-            fetch('http://localhost:8081/?url=www.google.es&times=2', {
+            fetch('http://localhost:8081' + path, {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
@@ -54,11 +52,12 @@ export default class MeasureTimeForm extends React.Component {
             }).then(response => {
                 if (response.ok) {
                     response.json().then(json => {
-                        console.log(json);
                         resolve(json);
                     }).catch(error => reject(error));
                 }
-            }).catch(error => reject(error));
+            }).catch(error => {
+                reject(error);
+            });
 
         });
     }
@@ -103,6 +102,9 @@ export default class MeasureTimeForm extends React.Component {
                     </div>
                     <button className="btn btn-primary" type="button" onClick={this.checkTimes}>Check response time</button>
                 </form>
+                <div className="error" role="alert">
+                    {this.state.error}
+                </div>
             </div>
             <BarcharResult data={this.state.data} />
         </div>);

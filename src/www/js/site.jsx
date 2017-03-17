@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 import MeasureTimeForm from './components/measure-time-form';
 
 const callData = {
-    destinationHost: "",
+    destinationHost: "www.google.es",
     times: 1,
+    error: "",
     data: [
-        { endpoint: 'EMEA', average: 4000 },
-        { endpoint: 'AMER', average: 3000 },
-        { endpoint: 'ASIA', average: 2000 },
+        { endpoint: 'EMEA', average: 0 }
     ]
 };
 

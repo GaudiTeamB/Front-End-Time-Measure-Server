@@ -26,7 +26,7 @@ export default class BarcharResult extends React.Component {
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="average" fill="#8884d8" />
+                <Bar dataKey="average" fill="#0075b0" />
             </BarChart>
         </div>);
     }

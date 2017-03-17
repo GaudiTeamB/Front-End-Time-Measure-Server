@@ -1,35 +1,33 @@
-const 
-    React = require("react"),
-    Recharts = require("recharts");
+"use strict";
 
-//import { LineChart, Line } from 'recharts';
-const {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = Recharts;
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-
-module.exports = React.createClass({
-    getInitialState: function() {
-        return {
-            data: this.props.data
+export default class BarcharResult extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: props.data
         };
-    },
+    }
 
-    updateBarchar: function(newData){
+    updateBarchar(newData) {
         this.setState({
             data: newData
         });
-    },
+    }
 
-    render: function() {
-  	    return	<div><h1>CHART</h1>
-  	                <BarChart width={600} height={300} data={this.props.data}
-                          margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                        <XAxis dataKey="endpoint"/>
-                        <YAxis/>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <Tooltip/>
-                        <Legend />
-                        <Bar dataKey="average" fill="#8884d8" />
-                    </BarChart>
-                </div>;
-  }
-});
+    render() {
+        return (<div className="col-sm-9">
+            <BarChart width={600} height={300} data={this.props.data}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                <XAxis dataKey="endpoint" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="average" fill="#8884d8" />
+            </BarChart>
+        </div>);
+    }
+}

@@ -1,0 +1,12 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+body:before {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right,#0479b5 50%,#78be20 100%);
+}
